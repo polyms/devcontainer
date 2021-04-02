@@ -5,5 +5,8 @@
   "repository": "git@github.com:polyms/devcontainers.git",
   "author": "vHades <anhvu.nd.0199@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "pynode": "docker build -f Dockerfile.python-node-buster -t docker.pkg.github.com/polyms/devcontainer/python-node-buster . && docker images | grep polyms"
+  }
 }
