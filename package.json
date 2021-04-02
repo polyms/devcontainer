@@ -1,0 +1,9 @@
+{
+  "name": "@polyms/devcontainers",
+  "version": "1.0.0",
+  "description": "dev container for vsCode",
+  "repository": "git@github.com:polyms/devcontainers.git",
+  "author": "vHades <anhvu.nd.0199@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
