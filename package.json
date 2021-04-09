@@ -7,6 +7,6 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "docker build -f Dockerfile.buster -t docker.pkg.github.com/polyms/devcontainer/buster . && docker images | grep polyms"
+    "build": "docker build -f Dockerfile.buster -t docker.pkg.github.com/polyms/devcontainers/buster . && docker images | grep polyms"
   }
 }
