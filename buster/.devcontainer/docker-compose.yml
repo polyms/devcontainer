@@ -2,8 +2,8 @@ version: '3.9'
 services:
   # Update this to the name of the service you want to work with in your docker-compose.yml file
   dev:
-    container_name: python-node-buster
-    image: docker.pkg.github.com/polyms/devcontainer/python-node-buster
+    container_name: buster
+    image: docker.pkg.github.com/polyms/devcontainers/buster
     working_dir: /workspace
     # If you want add a non-root user to your Dockerfile, you can use the "remoteUser"
     # property in devcontainer.json to cause VS Code its sub-processes (terminals, tasks,
@@ -12,7 +12,7 @@ services:
     # ensure the UID and GID of the container user you create matches your local user.
     # See https://aka.ms/vscode-remote/containers/non-root for details.
     #
-    user: node
+    user: vscode
 
     # Uncomment if you want to override the service's Dockerfile to one in the .devcontainer
     # folder. Note that the path of the Dockerfile and context is relative to the *primary*
