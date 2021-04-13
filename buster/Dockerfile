@@ -1,9 +1,9 @@
 FROM python:3.9.2-slim-buster
 
-ENV USER=vscode
+ARG USER=vscode
 
 RUN apt update \
-    && apt install -y --no-install-recommends ca-certificates curl zsh git openssh-server \
+    && apt install -y --no-install-recommends ca-certificates curl zsh git openssh-server sudo \
     && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
     && apt install -y nodejs \
     && npm install --no-cache -g npm \
@@ -11,7 +11,9 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     && apt autoclean \
     && groupadd --gid 1000 ${USER} \
-    && useradd --uid 1000 --gid ${USER} --shell /bin/bash --create-home ${USER}
+    && useradd --uid 1000 --gid ${USER} --shell /bin/bash --create-home ${USER} \
+    && echo $USER ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USER \
+    && chmod 0440 /etc/sudoers.d/$USER
 
 USER ${USER}
 
@@ -19,7 +21,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
     && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting \
     && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-COPY .zshrc /home/${USER}/
+COPY --chown=${USER}:${USER} .zshrc /home/${USER}/
 
 ENV NODE_VERSION=14.16.0 \
     YARN_VERSION=1.22.10 \
