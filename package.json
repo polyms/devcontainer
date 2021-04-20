@@ -8,6 +8,8 @@
   "private": false,
   "scripts": {
     "buster": "TAG=buster && cp .zshrc $TAG/ && docker build -f ${TAG}/Dockerfile -t docker.pkg.github.com/polyms/devcontainers/${TAG} . && yarn list:imgs",
+    "dotnet3": "TAG=dotnet-3 && cp .zshrc $TAG/ && docker build -f ${TAG}/Dockerfile -t docker.pkg.github.com/polyms/devcontainers/${TAG} . && yarn list:imgs",
+    "dotnet5": "TAG=dotnet-5 && cp .zshrc $TAG/ && docker build -f ${TAG}/Dockerfile -t docker.pkg.github.com/polyms/devcontainers/${TAG} . && yarn list:imgs",
     "list:imgs": "docker images | grep polyms/devcontainers"
   }
 }
