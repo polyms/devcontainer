@@ -3,8 +3,9 @@ FROM python:3.9.2-slim-buster
 ARG USER=vscode
 
 RUN apt update \
-    && apt install -y --no-install-recommends ca-certificates curl zsh git openssh-server sudo \
-    && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt install -y --no-install-recommends ca-certificates curl zsh git openssh-server sudo
+
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
     && apt install -y nodejs \
     && npm install --no-cache -g npm \
     && npm install --no-cache -g yarn \
@@ -22,10 +23,6 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
     && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 COPY --chown=${USER}:${USER} .zshrc /home/${USER}/
-
-ENV NODE_VERSION=14.16.0 \
-    YARN_VERSION=1.22.10 \
-    NPM_VERSION=7.8.0
 
 CMD [ "sleep", "infinity" ]
 
