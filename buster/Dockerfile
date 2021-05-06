@@ -12,9 +12,11 @@ RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
     && rm -rf /var/lib/apt/lists/* \
     && apt autoclean \
     && groupadd --gid 1000 ${USER} \
-    && useradd --uid 1000 --gid ${USER} --shell /bin/bash --create-home ${USER} \
+    && useradd --uid 1000 --gid ${USER} --shell /bin/zsh --create-home ${USER} \
     && echo $USER ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USER \
-    && chmod 0440 /etc/sudoers.d/$USER
+    && chmod 0440 /etc/sudoers.d/$USER \
+    && mkdir /workspaces \
+    && chown ${USER}:${USER} /workspaces
 
 USER ${USER}
 
@@ -25,6 +27,3 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 COPY --chown=${USER}:${USER} .zshrc /home/${USER}/
 
 CMD [ "sleep", "infinity" ]
-
-# [Optional] Uncomment if you want to install more global node packages
-# RUN su node -c "npm install -g <your-package-list -here>"
